@@ -6,7 +6,6 @@
 
 <style>
 @import url(d3.parsets.css);
-
 body {
   font-family: sans-serif;
   font-size: 12px;
@@ -16,7 +15,6 @@ body {
   margin-right: 1em;
   position: relative;
 }
-
 h1, h2, .dimension text {
   text-align: center;
   font-family: "PT Sans", Helvetica;
@@ -41,86 +39,68 @@ p.meta {
   text-align: center;
   
 }
-
 .dimension text
 {
    line-height: 300%;
 }
-
-
 text.icicle { pointer-events: none; }
-
 .options { font-size: 12px; text-align: center; padding: 5px 0; }
 .curves { float: left; }
 .source { float: right; }
 pre, code { font-family: "Menlo", monospace; }
-
 .html .value,
 .javascript .string,
 .javascript .regexp {
   color: #756bb1;
 }
-
 .html .tag,
 .css .tag,
 .javascript .keyword {
   color: #3182bd;
 }
-
 .comment {
   color: #636363;
 }
-
 .html .doctype,
 .javascript .number {
   color: #31a354;
 }
-
 .jumbotron {
   height: 200px;
   display: block;
   width: 100%;
   background: #e9ecef;
 }
-
 .square {
   float: left;
   width: 20px;
   height: 20px;
   border: 1px solid rgba(0, 0, 0, .2);
 }
-
-
 .guiding1 , .speacialneeds2, .unsuitable3{
     display: inline-block;
     vertical-align: middle;
     padding-top: 4px;
     padding-left: 5px;
 }
-
 .guiding {
   background: #96d096;
 }
-
 .specialneeds {
   background: #ffbf87;
 }
-
 .unsutable {
   background: #eb9394;
 }
-
 select, label {
     display:block;
 }
-
 .title-vis1{
     font-size: 3em;
     font-family: 'Open Sans Condensed', sans-serif;
     color: #333;
     font-weight: 600;
 }
-
 .subtitle-names {
     text-align: center;
     font-size: 1.2em;
@@ -128,7 +108,6 @@ select, label {
     font-family: 'Muli', sans-serif;
     margin-top: 15px;
 }
-
 .subtitle-vis1 {
     text-align: center;
     font-size: 1.6em;
@@ -136,7 +115,6 @@ select, label {
     font-family: 'Muli', sans-serif;
     margin-top: 15px;
 }
-
 .button {
     padding: 5px 18px;
     text-align: center;
@@ -145,7 +123,6 @@ select, label {
     cursor: pointer;
     float: right;
 }
-
 .buttonPredict{
     text-align: center;
     display: inline-block;
@@ -153,16 +130,13 @@ select, label {
     cursor: pointer;
     float: right;
 }
-
 .btndiv {
   display:block;
 }
-
 .result {
     display: inline;
     margin: 0;
 }
-
 .cont {
     border-radius: 5px;
     background-color: #c6c6c6;
@@ -170,7 +144,6 @@ select, label {
     display: inline-block;
     margin-left: 40px;
 }
-
 ul{
     width: 760px;
     margin-bottom: 20px;
@@ -183,23 +156,18 @@ li{
   float:left;
   display:inline;
 }
-
 .vis2Info{
     font-size: 1.2em;
     color: #333;
     font-family: 'Muli', sans-serif;
 }
-
-
 li:hover { 
     background-color: #fff659;
 }
-
 .gobackcls {
     display: inline-block;
     width: 1250px;
 }
-
 .titleInfo {
     font-size: 1.3em;
     color: #333;
@@ -207,12 +175,10 @@ li:hover {
     font-weight: 700;
     text-decoration: underline;
 }
-
 #double li  { width:50%;}
 #triple li  { width:33.333%; }
 #quad li    { width:25%; }
 #six li     { width:16.666%; }
-
 .html .attribute,
 .css .attribute,
 .javascript .class,
@@ -306,7 +272,6 @@ li:hover {
 <script src="d3.parsets.js"></script>
 <script src="highlight.min.js"></script>
 <script>
-
 //hide dictionary element
 document.getElementById('dictionary').style.display = "none";
 //decalre db array for all data
@@ -316,7 +281,6 @@ var chart = d3.parsets()
     .dimensions(["Status","Father","Mother"]);
     //set width
     chart.width(1250);
-
 //set layout of the chart
 var vis = d3.select("#vis").append("svg")
     .attr("width", 1250)
@@ -327,13 +291,11 @@ var partition = d3.layout.partition()
     .size([chart.width() + 500, chart.height() * 5 / 4])
     .children(function(d) { return d.children ? d3.values(d.children) : null; })
     .value(function(d) { return d.count; });
-
 //read data and call build tree method
 d3.csv("dogs_status.csv", function(error, csv) {
   db = csv;
   vis.datum(csv).call(chart);
 });
-
 //go back logic
 function goBack()
 {
@@ -353,15 +315,12 @@ function goBack()
        document.getElementById('subtitle-vis1').innerHTML = "";
        document.getElementById('title-vis1').innerHTML = "The prospect of a dog becoming a guiding dog depending on its parents";
        document.getElementById('subtitle-vis1').innerHTML = "Visualization of the linkage between parents and the suitability of the offsprings to become a guiding dog.";
-
       x.style.display = 'block';
       y.style.display = 'none';
       z.style.display = 'none';
-
       //scroll to top of the page
       document.body.scrollTop = document.documentElement.scrollTop = 0;
 };
-
 //clean reasult from prediction when father or mother changed
 function cleanText()
 {
@@ -370,22 +329,17 @@ function cleanText()
         document.getElementById('unsutable3').innerHTML = "";
         document.getElementById('errorDiv').innerHTML = "";
 };
-
 //predict function
 function predication() {
-
 //get the names are selected
 var father =  document.getElementById("fatherselect");
 var fatherValue = father.options[father.selectedIndex].value;
-
 var mother = document.getElementById("motherselect");
 var motherValue = mother.options[mother.selectedIndex].value;
-
   var total = 0;
   var guiding = 0;
   var specialneeds = 0;
   var unsutable = 0;
-
   //go over all db and find the offsping of spesific mother and father
     for(var i=0 ; i < db.length ; i++)
     {
@@ -407,14 +361,12 @@ var motherValue = mother.options[mother.selectedIndex].value;
             }
         }
     }
-
       //show the result in percentage
       if(total != 0)
       {
         var res_guiding = Math.round(parseFloat(guiding / total)*100).toFixed(1);
         var res_specialneeds = Math.round(parseFloat(specialneeds / total)*100).toFixed(1);
         var res_unsutable = Math.round(parseFloat(unsutable / total)*100).toFixed(1);
-
         document.getElementById('guide1').innerHTML = "<b>" + res_guiding + "%</b>";
         document.getElementById('special2').innerHTML = "<b>" + res_specialneeds + "%</b>";
         document.getElementById('unsutable3').innerHTML = "<b>" + res_unsutable + "%</b>";
@@ -425,7 +377,6 @@ var motherValue = mother.options[mother.selectedIndex].value;
          document.getElementById('errorDiv').innerHTML = "There is no data to show for <b>" + fatherValue + "</b> and <b>" + motherValue + "</b>.<br><br> "
       }
 };
-
 </script>
 
 </body>
