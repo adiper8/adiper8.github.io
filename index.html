@@ -1,1 +1,432 @@
-<h1>Hello2</h1>
+<html>
+<head>
+
+<meta charset="utf-8">
+<title>Parallel Sets</title>
+
+<style>
+@import url(d3.parsets.css);
+
+body {
+  font-family: sans-serif;
+  font-size: 12px;
+  
+  margin: 1em auto;
+  margin-left: 1em;
+  margin-right: 1em;
+  position: relative;
+}
+
+h1, h2, .dimension text {
+  text-align: center;
+  font-family: "PT Sans", Helvetica;
+  font-weight: 300;
+  font-size: 1.13em;
+  
+}
+h1 {
+  font-size: 4em;
+  margin: .20em 0 0 0;
+}
+h2 {
+  font-size: 2em;
+  margin: 1em 0 0.5em;
+  border-bottom: solid #ccc 1px;
+}
+p.meta, p.footer {
+  font-size: 13px;
+  color: #333;
+}
+p.meta {
+  text-align: center;
+  
+}
+
+.dimension text
+{
+   line-height: 300%;
+}
+
+
+text.icicle { pointer-events: none; }
+
+.options { font-size: 12px; text-align: center; padding: 5px 0; }
+.curves { float: left; }
+.source { float: right; }
+pre, code { font-family: "Menlo", monospace; }
+
+.html .value,
+.javascript .string,
+.javascript .regexp {
+  color: #756bb1;
+}
+
+.html .tag,
+.css .tag,
+.javascript .keyword {
+  color: #3182bd;
+}
+
+.comment {
+  color: #636363;
+}
+
+.html .doctype,
+.javascript .number {
+  color: #31a354;
+}
+
+.jumbotron {
+  height: 200px;
+  display: block;
+  width: 100%;
+  background: #e9ecef;
+}
+
+.foo {
+  float: left;
+  width: 20px;
+  height: 20px;
+  border: 1px solid rgba(0, 0, 0, .2);
+}
+
+
+.guiding1 , .speacialneeds2, .unsuitable3{
+    display: inline-block;
+    vertical-align: middle;
+    padding-top: 4px;
+    padding-left: 5px;
+}
+
+.guiding {
+  background: #96d096;
+}
+
+.specialneeds {
+  background: #ffbf87;
+}
+
+.unsutable {
+  background: #eb9394;
+}
+
+select, label {
+    display:block;
+}
+
+.title-vis1{
+    font-size: 3em;
+    font-family: 'Open Sans Condensed', sans-serif;
+    color: #333;
+    font-weight: 600;
+}
+
+.subtitle-names {
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+    font-family: 'Muli', sans-serif;
+    margin-top: 15px;
+}
+
+.subtitle-vis1 {
+    text-align: center;
+    font-size: 1.6em;
+    color: #333;
+    font-family: 'Muli', sans-serif;
+    margin-top: 15px;
+}
+
+.button {
+    padding: 5px 18px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+}
+
+.button2{
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: right;
+}
+
+.btndiv {
+  display:block;
+}
+
+.result {
+    display: inline;
+    margin: 0;
+}
+
+.cont {
+    border-radius: 5px;
+    background-color: #c6c6c6;
+    padding: 20px;
+    display: inline-block;
+    margin-left: 40px;
+}
+
+ul{
+    width: 760px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    /* border-top: 1px solid #ccc; */
+    float: left;
+}
+li{
+  line-height:1.5em;
+  float:left;
+  display:inline;
+}
+
+.vis2Info{
+    font-size: 1.2em;
+    color: #333;
+    font-family: 'Muli', sans-serif;
+}
+
+
+li:hover { 
+    background-color: #fff659;
+}
+
+.gobackcls {
+    display: inline-block;
+    width: 1250px;
+}
+
+.titleInfo {
+    font-size: 1.3em;
+    color: #333;
+    font-family: 'Muli', sans-serif;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+#double li  { width:50%;}
+#triple li  { width:33.333%; }
+#quad li    { width:25%; }
+#six li     { width:16.666%; }
+
+.html .attribute,
+.css .attribute,
+.javascript .class,
+.javascript .special {
+  color: #e6550d;
+}
+</style>
+</head>
+<body>
+   <h1 id="title-vis1" class="title-vis1">The prospect of a dog becoming a guiding dog depending on its parents</h1>     
+   <br> 
+   <h4 id="subtitle-vis1" class="subtitle-vis1">Visualization of the linkage between parents and the suitability of the offsprings to become a guiding dog.</h4>
+   <h4 class="subtitle-names">Creators: Adi Perlov and Reut Mizrachi</h4>
+   <div id="instactionid" class="instaction">
+      <br>*In order to move to failed tests visualization - Click on the path between mother and father where the status is specialneeds or unsutable.<br>
+  </div>
+  <center>
+    <div id="vis"></div>
+    <br><br><br>
+  </center>
+    <div class="titleInfo" id="vi2InfoTitle"></div>
+    <div class="vis2Info" id="vis2Names"></div>
+    <div class="vis2Info" id="vis2data"></div>
+  <center>
+    <div id="goback" width="1250" class="gobackcls"></div>
+    <div id="vis2"></div>
+    <div id="dictionary">
+      <ul id="triple"></ul>
+    </div>
+  </center>
+
+  <div id="predict" class="cont">
+     <h3 style="margin-top: 0px;">Prediction:</h3>
+     <section>
+       <div style="float:left;margin-right:20px;">
+           <label for="name">Father:</label>
+           <select id="fatherselect" onchange="cleanText()">
+               <option value="Kongo">Kongo</option>
+               <option value="Gibor">Gibor</option>
+               <option value="Silver">Silver</option>
+               <option value="Moris">Moris</option>
+               <option value="Belo">Belo</option>
+           </select>
+       </div>
+
+     <div style="float:left;margin-right:20px;">
+        <label for="email">Mother:</label>
+        <select id="motherselect" onchange="cleanText()">
+          <option value="Alfa">Alfa</option>
+          <option value="Laika">Laika</option>
+          <option value="Sunny">Sunny</option>
+          <option value="Wally">Wally</option>
+          <option value="Helen">Helen</option>
+          <option value="Minty">Minty</option>
+          <option value="Rosie">Rosie</option>
+          <option value="Tara">Tara</option>
+          <option value="Andy">Andy</option>
+          <option value="Daisy">Daisy</option>
+          <option value="Darya">Darya</option>
+          <option value="Lolly">Lolly</option>
+          <option value="Willow">Willow</option>
+          <option value="Moka">Moka</option>
+          <option value="Mona">Mona</option>
+          <option value="Yogi">Yogi</option>
+          <option value="Amber">Amber</option>
+          <option value="Amy">Amy</option>
+        </select>
+    </div>
+
+    <div style="float:left;padding-top: 11px;">
+      <button id="btn" class ="button2" type="button" onclick="predication()">Predict</button>
+    </div>
+    <br style="clear:both;" />
+    </section>
+
+<div id="PredictContainer" style="display: table;">
+    <br>
+      <div id="errorDiv"></div>
+        <div class='foo guiding'></div>
+        <div class='guiding1'>  Guiding: <p id="guide1" class='result'></p></div>
+        <br><br>
+        <div class='foo specialneeds'></div>
+        <div class='speacialneeds2'>  specialneeds: <p id="special2" class='result'></p></div>
+        <br><br>
+        <div class='foo unsutable'></div>
+        <div class='unsuitable3'>  unsuitable: <p  id="unsutable3" class='result'></p></div>
+      </div>
+</div>
+
+<script src="d3.min.js"></script>
+<script src="d3.parsets.js"></script>
+<script src="highlight.min.js"></script>
+<script>
+
+//hide dictionary element
+document.getElementById('dictionary').style.display = "none";
+//decalre db array for all data
+var db = [];
+//create the chart and sets dimentions
+var chart = d3.parsets()
+    .dimensions(["Status","Father","Mother"]);
+    //set width
+    chart.width(1250);
+
+//set layout of the chart
+var vis = d3.select("#vis").append("svg")
+    .attr("width", 1250)
+    .attr("height", chart.height());
+chart.spacing(20);
+var partition = d3.layout.partition()
+    .sort(null)
+    .size([chart.width() + 500, chart.height() * 5 / 4])
+    .children(function(d) { return d.children ? d3.values(d.children) : null; })
+    .value(function(d) { return d.count; });
+
+//read data and call build tree method
+d3.csv("dogs_status.csv", function(error, csv) {
+  db = csv;
+  vis.datum(csv).call(chart);
+});
+
+//go back logic
+function goBack()
+{
+      //show and hide elements according to view
+      var x = document.getElementById('vis');
+      var y = document.getElementById('vis2');
+      var z = document.getElementById('goback');
+      document.getElementById('vis2Names').style.display = "none";
+      document.getElementById('vi2InfoTitle').style.display = "none";
+      document.getElementById('vis2data').style.display = "none";
+      document.getElementById('vis2').innerHTML = "";
+      document.getElementById('triple').innerHTML = "";
+      document.getElementById('dictionary').style.display = "none";
+      document.getElementById('instactionid').style.display = "block";
+      document.getElementById('predict').style.display = "inline-block";
+       document.getElementById('title-vis1').innerHTML = "";
+       document.getElementById('subtitle-vis1').innerHTML = "";
+       document.getElementById('title-vis1').innerHTML = "The prospect of a dog becoming a guiding dog depending on its parents";
+       document.getElementById('subtitle-vis1').innerHTML = "Visualization of the linkage between parents and the suitability of the offsprings to become a guiding dog.";
+
+      x.style.display = 'block';
+      y.style.display = 'none';
+      z.style.display = 'none';
+
+      //scroll to top of the page
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+};
+
+//clean reasult from prediction when father or mother changed
+function cleanText()
+{
+        document.getElementById('guide1').innerHTML = "";
+        document.getElementById('special2').innerHTML = "";
+        document.getElementById('unsutable3').innerHTML = "";
+        document.getElementById('errorDiv').innerHTML = "";
+};
+
+//predict function
+function predication() {
+
+//get the names are selected
+var father =  document.getElementById("fatherselect");
+var fatherValue = father.options[father.selectedIndex].value;
+
+var mother = document.getElementById("motherselect");
+var motherValue = mother.options[mother.selectedIndex].value;
+
+  var total = 0;
+  var guiding = 0;
+  var specialneeds = 0;
+  var unsutable = 0;
+
+  //go over all db and find the offsping of spesific mother and father
+    for(var i=0 ; i < db.length ; i++)
+    {
+        //set their status in case the conditions are met
+        if(db[i].Father == fatherValue && db[i].Mother == motherValue)
+        {
+            total++;
+            if (db[i].Status == "guiding")
+            {
+              guiding++;
+            }
+            else if(db[i].Status == "specialneeds")
+            {
+              specialneeds++;
+            }
+            else if(db[i].Status == "unsuitable")
+            {
+              unsutable++;
+            }
+        }
+    }
+
+      //show the result in percentage
+      if(total != 0)
+      {
+        var res_guiding = Math.round(parseFloat(guiding / total)*100).toFixed(1);
+        var res_specialneeds = Math.round(parseFloat(specialneeds / total)*100).toFixed(1);
+        var res_unsutable = Math.round(parseFloat(unsutable / total)*100).toFixed(1);
+
+        document.getElementById('guide1').innerHTML = "<b>" + res_guiding + "%</b>";
+        document.getElementById('special2').innerHTML = "<b>" + res_specialneeds + "%</b>";
+        document.getElementById('unsutable3').innerHTML = "<b>" + res_unsutable + "%</b>";
+      }
+      else
+      {
+         // in case there is no offsprings
+         document.getElementById('errorDiv').innerHTML = "There is no data to show for <b>" + fatherValue + "</b> and <b>" + motherValue + "</b>.<br><br> "
+      }
+};
+
+</script>
+
+</body>
+</html>
